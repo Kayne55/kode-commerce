@@ -50,3 +50,7 @@ main {
 .kode-product-info {
   padding: 1rem;
 }
+
+.kode-product-price {
+  font-weight: bold;
+}
