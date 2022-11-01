@@ -47,3 +47,7 @@ main {
 .kode-product-price {
   font-weight: bold;
 }
+
+.rating span {
+  color: darkorange;
+}
