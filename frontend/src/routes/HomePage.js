@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import logger from 'use-reducer-logger';
@@ -56,10 +56,10 @@ function HomePage() {
               </div>
               <div className="kode-product-info">
                 <Link to={`/product/${product.slug}`}>
-                  <h3>{product.name}</h3>
+                  <p>{product.name}</p>
                 </Link>
                 <p className="kode-product-price">R{product.price}</p>
-                <button>Add to Cart</button>
+                <button className="btn btn-primary">Add to Cart</button>
               </div>
             </div>
           ))
