@@ -44,7 +44,7 @@ const data = {
       category: 'Shoes',
       image: '/images/adidas-grand-court-se-shoes.jpg',
       price: 1599,
-      countInStock: 9,
+      countInStock: 0,
       brand: 'Adidas',
       rating: 5,
       numReviews: 8,

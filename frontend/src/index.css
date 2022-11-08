@@ -51,3 +51,7 @@ main {
 .rating span {
   color: darkorange;
 }
+
+.image-large {
+  width: 100%;
+}

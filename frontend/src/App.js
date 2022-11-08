@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePage from './routes/HomePage';
 import ProductPage from './routes/ProductPage';
 import Navbar from 'react-bootstrap/Navbar';
@@ -18,7 +18,7 @@ function App() {
             </Container>
           </Navbar>
         </header>
-        <main>
+        <main className="mt-3">
           <Container>
             <Routes>
               <Route path="/product/:slug" element={<ProductPage />} />
