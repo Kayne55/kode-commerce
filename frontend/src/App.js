@@ -9,6 +9,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { Store } from './Store';
+import CartPage from './routes/CartPage';
 
 function App() {
   const { state } = useContext(Store);
@@ -39,6 +40,7 @@ function App() {
           <Container>
             <Routes>
               <Route path="/product/:slug" element={<ProductPage />} />
+              <Route path="/cart" element={<CartPage />} />
               <Route path="/" element={<HomePage />} />
             </Routes>
           </Container>
