@@ -1,7 +1,7 @@
 const data = {
   products: [
     {
-      _id: '1',
+      // _id: '1',
       name: 'Polo Mens slim fit gingham shirt',
       slug: 'polo-mens-slim-shirt',
       category: 'Shirts',
@@ -14,7 +14,7 @@ const data = {
       description: 'Polo Mens slim fit gingham cotton shirt.',
     },
     {
-      _id: '2',
+      // _id: '2',
       name: 'Levi 511 Slim Fit Jeans',
       slug: 'levi-511-jeans',
       category: 'Pants',
@@ -28,7 +28,7 @@ const data = {
         'A modern slim with room to move; the 511 slim fit stretch jeans are a classic since right now. These jeans sit below the waist with a slim fit from hip to ankle. Cut close to the body, the 511 Slim is a great alternative to the skinny jeans.',
     },
     {
-      _id: '3',
+      // _id: '3',
       name: 'Hurley Phantom Walkshorts',
       slug: 'hurley-phantom-walkshorts',
       category: 'Shorts',
@@ -42,7 +42,7 @@ const data = {
         'The phantom 20" walkshort offers 4-way stretch and quick-dry capabilities, meaning it will keep you performing to the max, whatever your day brings.',
     },
     {
-      _id: '4',
+      // _id: '4',
       name: 'Adidas Grand Court SE Shoes',
       slug: 'adidas-grand-court-se-shoes',
       category: 'Shoes',
