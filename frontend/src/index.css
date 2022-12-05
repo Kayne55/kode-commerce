@@ -63,3 +63,13 @@ main {
 .small-container {
   max-width: 600px;
 }
+
+.checkout-steps > div {
+  border-bottom: solid 0.2rem lightgrey;
+  color: lightgrey;
+}
+
+.checkout-steps > div.active {
+  border-bottom: solid 0.2rem orangered;
+  color: orangered;
+}
