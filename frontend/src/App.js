@@ -16,6 +16,7 @@ import CartPage from './routes/CartPage';
 import SigninPage from './routes/SigninPage';
 import ShippingAddressPage from './routes/ShippingAddressPage';
 import SignupPage from './routes/SignupPage';
+import PaymentMethodPage from './routes/PaymentMethodPage';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -25,6 +26,7 @@ function App() {
     ctxDispatch({ type: 'USER_SIGNOUT' });
     localStorage.removeItem('userInfo');
     localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('paymentMethod');
   };
 
   return (
@@ -80,6 +82,7 @@ function App() {
               <Route path="/signin" element={<SigninPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/shipping" element={<ShippingAddressPage />} />
+              <Route path="/payment" element={<PaymentMethodPage />} />
               <Route path="/" element={<HomePage />} />
             </Routes>
           </Container>
