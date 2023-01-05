@@ -1,0 +1,21 @@
+{
+  "name": "kode-commerce",
+  "version": "1.0.0",
+  "description": "Welcome to Kode Commerce, an e-commerce store built with React, Node and Express.",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd backend && npm install && cd ../frontend && npm install && npm run build",
+    "start": "node backend/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kayne55/kode-commerce.git"
+  },
+  "author": "Kayne Jeacocks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kayne55/kode-commerce/issues"
+  },
+  "homepage": "https://github.com/Kayne55/kode-commerce#readme"
+}
