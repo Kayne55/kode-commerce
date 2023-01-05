@@ -20,6 +20,7 @@ import PaymentMethodPage from './routes/PaymentMethodPage';
 import PlaceOrderPage from './routes/PlaceOrderPage';
 import OrderPage from './routes/OrderPage';
 import OrderHistoryPage from './routes/OrderHistoryPage';
+import ProfilePage from './routes/ProfilePage';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -30,6 +31,7 @@ function App() {
     localStorage.removeItem('userInfo');
     localStorage.removeItem('shippingAddress');
     localStorage.removeItem('paymentMethod');
+    window.location.href = '/signin';
   };
 
   return (
@@ -87,6 +89,7 @@ function App() {
               <Route path="/cart" element={<CartPage />} />
               <Route path="/signin" element={<SigninPage />} />
               <Route path="/signup" element={<SignupPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
               <Route path="/placeorder" element={<PlaceOrderPage />} />
               <Route path="/order/:id" element={<OrderPage />} />
               <Route path="/orderhistory" element={<OrderHistoryPage />} />
