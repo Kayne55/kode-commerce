@@ -29,6 +29,7 @@ export default function ProfilePage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  // eslint-disable-next-line
   const [{ loadingUpdate }, dispatch] = useReducer(reducer, {
     loadingUpdate: false,
   });
@@ -42,6 +43,7 @@ export default function ProfilePage() {
           name,
           email,
           password,
+          confirmPassword,
         },
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -92,7 +94,7 @@ export default function ProfilePage() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
+        <Form.Group className="mb-3" controlId="confirmPassword">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"
