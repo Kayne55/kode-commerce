@@ -1,5 +1,6 @@
+import { useContext, useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import HomePage from './routes/HomePage';
 import ProductPage from './routes/ProductPage';
@@ -7,10 +8,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Badge from 'react-bootstrap/Badge';
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
 import { Store } from './Store';
 import CartPage from './routes/CartPage';
 import SigninPage from './routes/SigninPage';
@@ -21,6 +23,9 @@ import PlaceOrderPage from './routes/PlaceOrderPage';
 import OrderPage from './routes/OrderPage';
 import OrderHistoryPage from './routes/OrderHistoryPage';
 import ProfilePage from './routes/ProfilePage';
+import { getError } from './utils';
+import axios from 'axios';
+import SearchBox from './components/SearchBox';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -34,6 +39,19 @@ function App() {
     window.location.href = '/signin';
   };
 
+  const [sidebarIsOpen, setSideBarIsOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get(`/api/products/categories`);
+        setCategories(data);
+      } catch (err) {
+        toast.error(getError(err));
+      }
+    };
+    fetchCategories();
+  }, []);
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
@@ -41,11 +59,18 @@ function App() {
         <header>
           <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
+              <Button
+                variant="dark"
+                onClick={() => setSideBarIsOpen(!sidebarIsOpen)}
+              >
+                <i className="fas fa-bars"></i>
+              </Button>
               <LinkContainer to="/">
                 <Navbar.Brand>Kode Store</Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
+                <SearchBox />
                 <Nav className="me-auto w-100 justify-content-end">
                   <Link to="/cart" className="nav-link">
                     Cart
@@ -82,6 +107,7 @@ function App() {
             </Container>
           </Navbar>
         </header>
+
         <main className="mt-3">
           <Container>
             <Routes>
@@ -99,6 +125,38 @@ function App() {
             </Routes>
           </Container>
         </main>
+        <div>
+          <Offcanvas
+            show={sidebarIsOpen}
+            onHide={() => setSideBarIsOpen(false)}
+          >
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title>Categories</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <Nav>
+                {/* <Nav.Item>
+                  <h4>Categories</h4>
+                </Nav.Item> */}
+                <Nav.Item>
+                  {categories.map((category) => (
+                    <Nav.Item key={category}>
+                      <LinkContainer
+                        to={{
+                          pathname: '/search',
+                          search: `category=${category}`,
+                        }}
+                        onClick={() => setSideBarIsOpen(false)}
+                      >
+                        <Nav.Link>{category}</Nav.Link>
+                      </LinkContainer>
+                    </Nav.Item>
+                  ))}
+                </Nav.Item>
+              </Nav>
+            </Offcanvas.Body>
+          </Offcanvas>
+        </div>
         <footer>
           <div className="text-center">
             <p>Copyright 2022 Kode Store. All Rights Reserved.</p>

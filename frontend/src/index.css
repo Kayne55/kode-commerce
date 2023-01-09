@@ -73,3 +73,36 @@ main {
   border-bottom: solid 0.2rem orangered;
   color: orangered;
 }
+
+/**
+* Bootstrap Overrides
+**/
+.btn-primary,
+.btn-outline-primary {
+  color: #fff;
+  background-color: #1961ae;
+  border: #1961ae;
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+  background-color: #11bab8;
+}
+
+a,
+.nav-link {
+  color: #1961ae;
+}
+
+a:hover,
+.nav-link:hover {
+  color: #11bab8;
+}
+
+nav.bg-dark .nav-link {
+  color: #fff;
+}
+
+nav.bg-dark .nav-link:hover {
+  color: #11bab8;
+}
