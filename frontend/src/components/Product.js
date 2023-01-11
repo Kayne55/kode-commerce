@@ -27,13 +27,21 @@ function Product(props) {
   };
 
   return (
-    <Card key={product.slug} className="mb-3">
-      <Link to={`/product/${product.slug}`}>
-        <img className="card-img-top" src={product.image} alt={product.name} />
-      </Link>
+    <Card key={product.slug} className="mb-3 kode-product-card">
+      <div className="kode-product-card-img">
+        <Link to={`/product/${product.slug}`}>
+          <img
+            className="card-img-top"
+            src={product.image}
+            alt={product.name}
+          />
+        </Link>
+      </div>
       <Card.Body>
         <Link to={`/product/${product.slug}`}>
-          <Card.Title>{product.name}</Card.Title>
+          <Card.Title className="kode-product-card-title">
+            {product.name}
+          </Card.Title>
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />
         <Card.Text>R{product.price}</Card.Text>

@@ -162,7 +162,7 @@ export default function AddProduct() {
                 aria-hidden="true"
               />
             )}{' '}
-            Update product
+            Add Product
           </Button>
         </div>
       </Form>

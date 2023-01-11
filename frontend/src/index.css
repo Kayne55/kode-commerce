@@ -15,6 +15,22 @@ main {
   min-height: 100vh;
 }
 
+.kode-product-card {
+  max-height: 470px;
+}
+
+.kode-product-card-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.kode-product-card-img {
+  max-height: 304px;
+  min-height: 304px;
+  overflow: hidden;
+}
+
 .kode-products {
   display: flex;
   flex-wrap: wrap;
