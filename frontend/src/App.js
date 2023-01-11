@@ -32,6 +32,7 @@ import DashboardPage from './routes/DashboardPage';
 import AdminRoute from './components/AdminRoute';
 import ProductListPage from './routes/ProductListPage';
 import ProductEditPage from './routes/ProductEditPage';
+import ProductAddPage from './routes/ProductAddPage';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -179,6 +180,14 @@ function App() {
                 element={
                   <AdminRoute>
                     <ProductListPage />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/admin/addproduct"
+                element={
+                  <AdminRoute>
+                    <ProductAddPage />
                   </AdminRoute>
                 }
               />

@@ -112,7 +112,7 @@ export default function EditProduct() {
       <Helmet>
         <title>Edit Product ${productId}</title>
       </Helmet>
-      <h1 className="mb-3">Edit prodduct ${productId}</h1>
+      <h1 className="mb-3">Edit Product ${productId}</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (

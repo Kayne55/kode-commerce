@@ -69,7 +69,7 @@ export default function ProductListPage() {
           <h1>Products</h1>
         </Col>
         <Col className="col text-end">
-          <Link to="/addproduct" className="btn btn-primary btn-sm">
+          <Link to="/admin/addproduct" className="btn btn-primary btn-sm">
             Add New Product
           </Link>
         </Col>
