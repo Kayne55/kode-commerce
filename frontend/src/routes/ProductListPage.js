@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
 import Table from 'react-bootstrap/Table';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import Button from 'react-bootstrap/Button';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -33,6 +36,7 @@ export default function ProductListPage() {
   });
 
   const { search /*pathname*/ } = useLocation();
+  const navigate = useNavigate();
   const sp = new URLSearchParams(search);
   const page = sp.get('page') || 1;
 
@@ -60,7 +64,16 @@ export default function ProductListPage() {
 
   return (
     <div>
-      <h1>Products</h1>
+      <Row>
+        <Col>
+          <h1>Products</h1>
+        </Col>
+        <Col className="col text-end">
+          <Link to="/addproduct" className="btn btn-primary btn-sm">
+            Add New Product
+          </Link>
+        </Col>
+      </Row>
       {loading ? (
         <LoadingBox />
       ) : error ? (
@@ -75,6 +88,7 @@ export default function ProductListPage() {
                 <th>PRICE</th>
                 <th>CATEGORY</th>
                 <th>BRAND</th>
+                <th>ACTIONS</th>
               </tr>
             </thead>
             <tbody>
@@ -85,6 +99,16 @@ export default function ProductListPage() {
                   <td>{product.price}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
+                  <td>
+                    <Button
+                      type="button"
+                      variant="primary"
+                      size="sm"
+                      onClick={() => navigate(`/admin/product/${product._id}`)}
+                    >
+                      Edit
+                    </Button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -92,7 +116,11 @@ export default function ProductListPage() {
           <div>
             {[...Array(pages).keys()].map((x) => (
               <Link
-                className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
+                className={
+                  x + 1 === Number(page)
+                    ? 'btn btn-primary btn-sm me-md-1'
+                    : 'btn btn-secondary btn-sm me-md-1'
+                }
                 key={x + 1}
                 to={`/admin/products?page=${x + 1}`}
               >

@@ -272,8 +272,12 @@ export default function SearchPage() {
                     }}
                   >
                     <Button
-                      className={Number(page) === x + 1 ? 'fw-bold' : ''}
-                      variant="light"
+                      className={
+                        Number(page) === x + 1
+                          ? 'btn btn-primary btn-sm me-md-1'
+                          : 'btn btn-secondary btn-sm me-md-1'
+                      }
+                      variant="primary"
                     >
                       {x + 1}
                     </Button>
