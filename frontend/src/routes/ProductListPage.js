@@ -5,9 +5,13 @@ import { Store } from '../Store';
 import Table from 'react-bootstrap/Table';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+// import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import Button from 'react-bootstrap/Button';
+import { toast } from 'react-toastify';
+import { getError } from '../utils.js';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -23,6 +27,14 @@ const reducer = (state, action) => {
       };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
+    case 'DELETE_REQUEST':
+      return { ...state, loadingDelete: true, successDelete: false };
+    case 'DELETE_SUCCESS':
+      return { ...state, loadingDelete: false, successDelete: true };
+    case 'DELETE_FAIL':
+      return { ...state, loadingDelete: false, successDelete: false };
+    case 'DELETE_RESET':
+      return { ...state, loadingDelete: false, successDelete: false };
 
     default:
       return state;
@@ -30,7 +42,10 @@ const reducer = (state, action) => {
 };
 
 export default function ProductListPage() {
-  const [{ loading, error, products, pages }, dispatch] = useReducer(reducer, {
+  const [
+    { loading, error, products, pages, loadingDelete, successDelete },
+    dispatch,
+  ] = useReducer(reducer, {
     loading: true,
     error: '',
   });
@@ -59,8 +74,36 @@ export default function ProductListPage() {
         // });
       }
     };
-    fetchData();
-  }, [page, userInfo]);
+    if (successDelete) {
+      dispatch({ type: 'DELETE_RESET' });
+    } else {
+      fetchData();
+    }
+  }, [page, successDelete, userInfo]);
+
+  // const [show, setShow] = useState(false);
+  // const handleShow = () => setShow(true);
+  // const handleClose = () => setShow(false);
+  // let productDeleteId = '';
+
+  const deleteHandler = async (product) => {
+    if (window.confirm('Are you sure you want to delete this product?')) {
+      try {
+        await axios.delete(`/api/products/${product._id}`, {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        });
+        // handleClose();
+        toast.success('Product deleted successfully!');
+        dispatch({ type: 'DELETE_SUCCESS' });
+      } catch (err) {
+        // handleClose();
+        toast.error(getError(err));
+        dispatch({
+          type: 'DELETE_FAIL',
+        });
+      }
+    }
+  };
 
   return (
     <div>
@@ -102,11 +145,28 @@ export default function ProductListPage() {
                   <td>
                     <Button
                       type="button"
-                      variant="primary"
+                      variant="warning"
                       size="sm"
                       onClick={() => navigate(`/admin/product/${product._id}`)}
                     >
                       Edit
+                    </Button>
+                    &nbsp;
+                    <Button
+                      type="button"
+                      variant="danger"
+                      size="sm"
+                      onClick={() => deleteHandler(product)}
+                    >
+                      {loadingDelete && (
+                        <Spinner
+                          as="span"
+                          animation="border"
+                          size="sm"
+                          role="status"
+                        />
+                      )}{' '}
+                      Delete
                     </Button>
                   </td>
                 </tr>
@@ -128,6 +188,22 @@ export default function ProductListPage() {
               </Link>
             ))}
           </div>
+          {/* <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Delete Product {productDeleteId}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Are you sure you want to delete this product?
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Cancel
+              </Button>
+              <Button variant="danger" onClick={deleteHandler(productDeleteId)}>
+                Yes
+              </Button>
+            </Modal.Footer>
+          </Modal> */}
         </>
       )}
     </div>
