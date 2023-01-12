@@ -94,7 +94,7 @@ export default function OrderListPage() {
                     variant="primary"
                     size="sm"
                     onClick={() => {
-                      navigate(`/orders/${order._id}`);
+                      navigate(`/order/${order._id}`);
                     }}
                   >
                     Details
