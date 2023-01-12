@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useReducer, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Spinner from 'react-bootstrap/Spinner';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
 import LoadingBox from '../components/LoadingBox';
@@ -25,6 +26,12 @@ const reducer = (state, action) => {
       return { ...state, loadingUpdate: false };
     case 'UPDATE_FAIL':
       return { ...state, loadingUpdate: false };
+    case 'UPLOAD_REQUEST':
+      return { ...state, loadingUpload: true, errorUpload: '' };
+    case 'UPLOAD_SUCCESS':
+      return { ...state, loadingUpload: false, errorUpload: '' };
+    case 'UPLOAD_FAIL':
+      return { ...state, loadingUpload: false, errorUpload: action.payload };
 
     default:
       return state;
@@ -39,10 +46,11 @@ export default function EditProduct() {
   const { state } = useContext(Store);
   const { userInfo } = state;
 
-  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
-    loading: true,
-    error: '',
-  });
+  const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      error: '',
+    });
 
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
@@ -107,12 +115,34 @@ export default function EditProduct() {
     }
   };
 
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append('file', file);
+    try {
+      dispatch({ type: 'UPLOAD_REQUEST' });
+      const { data } = await axios.post('/api/upload', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+
+      dispatch({ type: 'UPLOAD_SUCCESS' });
+      toast.success('Image uploaded successfully!');
+      setImage(data.secure_url);
+    } catch (err) {
+      toast.error(getError(err));
+      dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
+    }
+  };
+
   return (
     <Container className="small-container">
       <Helmet>
-        <title>Edit Product ${productId}</title>
+        <title>Edit Product {productId}</title>
       </Helmet>
-      <h1 className="mb-3">Edit Product ${productId}</h1>
+      <h1 className="mb-3">Edit Product {productId}</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -146,6 +176,13 @@ export default function EditProduct() {
               required
             />
           </Form.Group>
+          <Form.Group className="mb-3" controlId="imageFile">
+            <Form.Label>Upload File</Form.Label>
+            <Form.Control type="file" onChange={uploadFileHandler} required />
+            {loadingUpload && (
+              <Spinner animation="border" variant="primary" size="sm" />
+            )}
+          </Form.Group>
           <Form.Group className="mb-3" controlId="image">
             <Form.Label>Image URL</Form.Label>
             <Form.Control
@@ -153,6 +190,7 @@ export default function EditProduct() {
               type="text"
               onChange={(e) => setImage(e.target.value)}
               required
+              disabled
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="category">
@@ -194,10 +232,17 @@ export default function EditProduct() {
           </Form.Group>
           <div className="mb-3">
             <Button disabled={loadingUpdate} type="submit">
-              {' '}
+              {loadingUpdate && (
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              )}{' '}
               Update Product
             </Button>
-            {loadingUpdate && <LoadingBox />}
           </div>
         </Form>
       )}
