@@ -14,16 +14,16 @@ uploadRouter.post(
   isAdmin,
   upload.single('file'),
   async (req, res) => {
-    cloudinary.config({
-      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-      api_key: process.env.CLOUDINARY_API_KEY,
-      api_secret: process.env.CLOUDINARY_API_SECRET,
-    });
     // cloudinary.config({
-    //   cloud_name: 'kodestore',
-    //   api_key: '377896347825497',
-    //   api_secret: '_Asx9yJwlY86O-AkQ1zNlaQtbP4',
+    //   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    //   api_key: process.env.CLOUDINARY_API_KEY,
+    //   api_secret: process.env.CLOUDINARY_API_SECRET,
     // });
+    cloudinary.config({
+      cloud_name: 'kodestore',
+      api_key: '377896347825497',
+      api_secret: '_Asx9yJwlY86O-AkQ1zNlaQtbP4',
+    });
     const streamUpload = (req) => {
       return new Promise((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream((error, result) => {
