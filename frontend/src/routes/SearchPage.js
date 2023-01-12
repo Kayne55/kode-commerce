@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet-async';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Rating from '../components/Rating';
 import LoadingBox from '../components/LoadingBox';
@@ -36,16 +37,28 @@ const reducer = (state, action) => {
 
 const prices = [
   {
-    name: 'R1 to R50',
-    value: '1-50',
+    name: 'R0 to R1000',
+    value: '0-1000',
   },
   {
-    name: 'R51 to R200',
-    value: '51-200',
+    name: 'R1001 to R2500',
+    value: '1001-2500',
   },
   {
-    name: 'R201 to R1000',
-    value: '201-1000',
+    name: 'R2501 to R5000',
+    value: '2501-5000',
+  },
+  {
+    name: 'R5001 to R10000',
+    value: '5001-10000',
+  },
+  {
+    name: 'R10001 to R25000',
+    value: '10001-25000',
+  },
+  {
+    name: 'R25001 to R50000',
+    value: '25001-50000',
   },
 ];
 
@@ -137,75 +150,81 @@ export default function SearchPage() {
       </Helmet>
       <Row>
         <Col md={3}>
-          <h3>Department</h3>
-          <div>
-            <ul>
-              <li>
-                <Link
-                  className={'all' === category ? 'fw-bold' : ''}
-                  to={getFilterUrl({ category: 'all' })}
-                >
-                  Any
-                </Link>
-              </li>
-              {categories.map((c) => (
-                <li key={c}>
-                  <Link
-                    className={c === category ? 'fw-bold' : ''}
-                    to={getFilterUrl({ category: c })}
-                  >
-                    {c}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3>Price</h3>
-            <ul>
-              <li>
-                <Link
-                  className={'all' === price ? 'fw-bold' : ''}
-                  to={getFilterUrl({ price: 'all' })}
-                >
-                  Any
-                </Link>
-              </li>
-              {prices.map((p) => (
-                <li key={p.value}>
-                  <Link
-                    className={p.value === price ? 'fw-bold' : ''}
-                    to={getFilterUrl({ price: p.value })}
-                  >
-                    {p.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3>Avg. Customer Rating</h3>
-            <ul>
-              {ratings.map((r) => (
-                <li key={r.name}>
-                  <Link
-                    className={`${r.rating}` === `${rating}` ? 'fw-bold' : ''}
-                    to={getFilterUrl({ rating: r.rating })}
-                  >
-                    <Rating caption={' & up'} rating={r.rating}></Rating>
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link
-                  className={'all' === rating ? 'fw-bold' : ''}
-                  to={getFilterUrl({ rating: 'all' })}
-                >
-                  <Rating caption={' & up'} rating={0}></Rating>
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <Card className="kode-search-filters">
+            <Card.Body>
+              <h3>Department</h3>
+              <div>
+                <ul>
+                  <li>
+                    <Link
+                      className={'all' === category ? 'fw-bold' : ''}
+                      to={getFilterUrl({ category: 'all' })}
+                    >
+                      Any
+                    </Link>
+                  </li>
+                  {categories.map((c) => (
+                    <li key={c}>
+                      <Link
+                        className={c === category ? 'fw-bold' : ''}
+                        to={getFilterUrl({ category: c })}
+                      >
+                        {c}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3>Price</h3>
+                <ul>
+                  <li>
+                    <Link
+                      className={'all' === price ? 'fw-bold' : ''}
+                      to={getFilterUrl({ price: 'all' })}
+                    >
+                      Any
+                    </Link>
+                  </li>
+                  {prices.map((p) => (
+                    <li key={p.value}>
+                      <Link
+                        className={p.value === price ? 'fw-bold' : ''}
+                        to={getFilterUrl({ price: p.value })}
+                      >
+                        {p.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3>Avg. Customer Rating</h3>
+                <ul>
+                  {ratings.map((r) => (
+                    <li key={r.name}>
+                      <Link
+                        className={
+                          `${r.rating}` === `${rating}` ? 'fw-bold' : ''
+                        }
+                        to={getFilterUrl({ rating: r.rating })}
+                      >
+                        <Rating caption={' & up'} rating={r.rating}></Rating>
+                      </Link>
+                    </li>
+                  ))}
+                  <li>
+                    <Link
+                      className={'all' === rating ? 'fw-bold' : ''}
+                      to={getFilterUrl({ rating: 'all' })}
+                    >
+                      <Rating caption={' & up'} rating={0}></Rating>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </Card.Body>
+          </Card>
         </Col>
         <Col md={9}>
           {loading ? (
