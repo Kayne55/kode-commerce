@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useReducer } from 'react';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 import LoadingBox from '../components/LoadingBox.js';
 import MessageBox from '../components/MessageBox.js';
 import { Store } from '../Store.js';
@@ -23,6 +24,8 @@ const reducer = (state, action) => {
 };
 
 export default function UserListPage() {
+  const navigate = useNavigate();
+
   const [{ loading, error, users }, dispatch] = useReducer(reducer, {
     loading: true,
     error: '',
@@ -78,8 +81,13 @@ export default function UserListPage() {
                 <td>{user.email}</td>
                 <td>{user.isAdmin ? 'Yes' : 'No'}</td>
                 <td>
-                  <Button type="button" variant="primary" size="sm">
-                    View
+                  <Button
+                    type="button"
+                    variant="primary"
+                    size="sm"
+                    onClick={() => navigate(`/admin/user/${user._id}`)}
+                  >
+                    Edit
                   </Button>
                   &nbsp;
                   <Button type="button" variant="danger" size="sm">
