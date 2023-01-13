@@ -8,6 +8,8 @@ import { Helmet } from 'react-helmet-async';
 import { Store } from '../Store';
 import { getError } from '../utils';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import Spinner from 'react-bootstrap/Spinner';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -17,6 +19,18 @@ const reducer = (state, action) => {
       return { ...state, orders: action.payload, loading: false };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
+    case 'DELETE_REQUEST':
+      return { ...state, loadingDelete: true, deleteSuccess: false };
+    case 'DELETE_SUCCESS':
+      return { ...state, loadingDelete: false, deleteSuccess: true };
+    case 'DELETE_FAIL':
+      return {
+        ...state,
+        loadingDelete: false,
+        deleteSuccess: false,
+      };
+    case 'DELETE_RESET':
+      return { ...state, loadingDelete: false, deleteSuccess: false };
 
     default:
       return state;
@@ -29,10 +43,11 @@ export default function OrderListPage() {
   const { state } = useContext(Store);
   const { userInfo } = state;
 
-  const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
-    loading: true,
-    error: '',
-  });
+  const [{ loading, error, orders, loadingDelete, deleteSuccess }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      error: '',
+    });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,8 +64,28 @@ export default function OrderListPage() {
         });
       }
     };
-    fetchData();
-  }, [userInfo]);
+    if (deleteSuccess) {
+      dispatch({ type: 'DELETE_RESET' });
+    } else {
+      fetchData();
+    }
+  }, [deleteSuccess, userInfo]);
+
+  const deleteHandler = async (order) => {
+    if (window.confirm('Are you sure you want to delete this order?')) {
+      try {
+        dispatch({ type: 'DELETE_REQUEST' });
+        await axios.delete(`/api/orders/${order._id}`, {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        });
+        toast.success('Order successfully deleted!');
+        dispatch({ type: 'DELETE_SUCCESS' });
+      } catch (err) {
+        toast.error(getError(err));
+        dispatch({ type: 'DELETE_FAIL' });
+      }
+    }
+  };
 
   return (
     <div>
@@ -98,6 +133,23 @@ export default function OrderListPage() {
                     }}
                   >
                     Details
+                  </Button>
+                  &nbsp;
+                  <Button
+                    type="button"
+                    variant="danger"
+                    size="sm"
+                    onClick={() => deleteHandler(order)}
+                  >
+                    {loadingDelete && (
+                      <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                      />
+                    )}{' '}
+                    Delete
                   </Button>
                 </td>
               </tr>
