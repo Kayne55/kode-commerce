@@ -204,6 +204,18 @@ export default function OrderPage() {
                 <strong>Address: </strong> {order.shippingAddress.address},{' '}
                 {order.shippingAddress.city}, {order.shippingAddress.postalCode}
                 , {order.shippingAddress.country}
+                <br />
+                {order.shippingAddress.location &&
+                  order.shippingAddress.location.lat && (
+                    <a
+                      role="button"
+                      className="btn btn-outline-primary btn-sm"
+                      target="_new"
+                      href={`https://maps.google.com?q=${order.shippingAddress.location.lat},${order.shippingAddress.location.lng}`}
+                    >
+                      <i className="fas fa-map-marked-alt"></i>&nbsp;View On Map
+                    </a>
+                  )}
               </Card.Text>
               {order.isDelivered ? (
                 <MessageBox variant="success">
