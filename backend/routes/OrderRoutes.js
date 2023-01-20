@@ -3,7 +3,7 @@ import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/OrderModel.js';
 import User from '../models/UserModel.js';
 import Product from '../models/ProductModel.js';
-import { isAuth, isAdmin } from '../utils.js';
+import { isAuth, isAdmin, mailgun, payOrderEmailTemplate } from '../utils.js';
 //
 const orderRouter = express.Router();
 
@@ -125,7 +125,12 @@ orderRouter.put(
   '/:id/pay',
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id);
+    const siteUrl = req.protocol + '://' + req.hostname + '/order/';
+    console.log(siteUrl);
+    const order = await Order.findById(req.params.id).populate(
+      'user',
+      'email name'
+    );
     if (order) {
       (order.isPaid = true), (order.paidAt = Date.now());
       order.paymentResult = {
@@ -135,6 +140,26 @@ orderRouter.put(
         email_address: req.body.email_address,
       };
       const updatedOrder = await order.save();
+      mailgun()
+        .messages()
+        .send(
+          {
+            from: 'Kode Store <info@kodesoftware.co.za>',
+            to: `${order.user.name} <${order.user.email}>`,
+            subject: `Your order ${order._id}`,
+            html: payOrderEmailTemplate(order, siteUrl),
+          },
+          (error, body) => {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log(body);
+            }
+          }
+        );
+
+      console.log(req.baseUrl);
+
       res.send({ message: 'Order Paid', order: updatedOrder });
     } else {
       res.status(404).send({ message: 'Order Not Found' });
