@@ -44,6 +44,7 @@ function ProductPage() {
 
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
+  const [selectedImage, setSelectedImage] = useState('');
 
   const navigate = useNavigate();
   const params = useParams();
@@ -133,7 +134,11 @@ function ProductPage() {
     <div>
       <Row>
         <Col md={6}>
-          <img className="image-large" src={product.image} alt={product.name} />
+          <img
+            className="image-large"
+            src={selectedImage || product.image}
+            alt={product.name}
+          />
         </Col>
         <Col md={3}>
           <ListGroup variant="flush">
@@ -152,6 +157,26 @@ function ProductPage() {
             <ListGroup.Item>
               <p>Price: R{product.price}</p>
             </ListGroup.Item>
+
+            <ListGroup.Item>
+              <Row xs={1} md={2} className="g-2">
+                {[product.image, ...product.images].map((x) => (
+                  <Col key={x}>
+                    <Card>
+                      <Button
+                        className="thumbnail"
+                        type="button"
+                        variant="light"
+                        onClick={() => setSelectedImage(x)}
+                      >
+                        <Card.Img variant="top" src={x} alt="Product Image" />
+                      </Button>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </ListGroup.Item>
+
             <ListGroup.Item>
               <h5>Description:</h5>
               <p>{product.description}</p>

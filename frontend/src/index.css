@@ -112,6 +112,10 @@ main {
   display: flex;
 }
 
+.button.thumbnail {
+  padding: 0;
+}
+
 /**
 * Bootstrap Overrides
 **/
