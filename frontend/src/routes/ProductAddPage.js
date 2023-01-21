@@ -3,12 +3,14 @@ import React, { useContext, useReducer, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Spinner from 'react-bootstrap/Spinner';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
 import { getError } from '../utils';
 import { toast } from 'react-toastify';
-import Spinner from 'react-bootstrap/Spinner';
+import MessageBox from '../components/MessageBox';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -44,6 +46,7 @@ export default function AddProduct() {
   const [slug, setSlug] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
+  const [images, setImages] = useState([]);
   const [category, setCategory] = useState('');
   const [brand, setBrand] = useState('');
   const [countInStock, setCountInStock] = useState('');
@@ -60,6 +63,7 @@ export default function AddProduct() {
           slug,
           price,
           image,
+          images,
           category,
           brand,
           countInStock,
@@ -78,7 +82,7 @@ export default function AddProduct() {
     }
   };
 
-  const uploadFileHandler = async (e) => {
+  const uploadFileHandler = async (e, galleryImages) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
     bodyFormData.append('file', file);
@@ -92,12 +96,21 @@ export default function AddProduct() {
       });
 
       dispatch({ type: 'UPLOAD_SUCCESS' });
-      toast.success('Image uploaded successfully!');
-      setImage(data.secure_url);
+      if (galleryImages) {
+        setImages([...images, data.secure_url]);
+      } else {
+        setImage(data.secure_url);
+      }
+      toast.success('Images uploaded successfully!');
     } catch (err) {
       toast.error(getError(err));
       dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
     }
+  };
+
+  const deleteFileHandler = async (fileName) => {
+    setImages(images.filter((x) => x !== fileName));
+    toast.success('Image removed. Click "Update" to apply changes.');
   };
 
   return (
@@ -134,13 +147,15 @@ export default function AddProduct() {
             required
           />
         </Form.Group>
+
         <Form.Group className="mb-3" controlId="imageFile">
-          <Form.Label>Upload File</Form.Label>
-          <Form.Control type="file" onChange={uploadFileHandler} required />
+          <Form.Label>Featured Image</Form.Label>
+          <Form.Control type="file" onChange={uploadFileHandler} />
           {loadingUpload && (
             <Spinner animation="border" variant="primary" size="sm" />
           )}
         </Form.Group>
+
         <Form.Group className="mb-3" controlId="image">
           <Form.Label>Image URL</Form.Label>
           <Form.Control
@@ -151,6 +166,33 @@ export default function AddProduct() {
             disabled
           />
         </Form.Group>
+
+        <Form.Group className="mb-3" controlId="imageGallery">
+          <Form.Label>Image Gallery</Form.Label>
+          {images.length === 0 && <MessageBox>No Images</MessageBox>}
+          <ListGroup variant="flush">
+            {images.map((x) => (
+              <ListGroup.Item key={x}>
+                {x}
+                <Button variant="light" onClick={() => deleteFileHandler(x)}>
+                  <i className="fa fa-times-circle"></i>
+                </Button>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="uploadGalleryImages">
+          <Form.Label>Upload Gallery Images</Form.Label>
+          <Form.Control
+            type="file"
+            onChange={(e) => uploadFileHandler(e, true)}
+          />
+          {loadingUpload && (
+            <Spinner animation="border" variant="primary" size="sm" />
+          )}
+        </Form.Group>
+
         <Form.Group className="mb-3" controlId="category">
           <Form.Label>Category</Form.Label>
           <Form.Control

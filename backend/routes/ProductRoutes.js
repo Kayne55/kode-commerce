@@ -20,6 +20,7 @@ productRouter.post(
       slug: req.body.slug,
       price: req.body.price,
       image: req.body.image,
+      images: req.body.images,
       category: req.body.category,
       rating: 0,
       numReviews: 0,
