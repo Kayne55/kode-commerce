@@ -139,84 +139,73 @@ function ProductPage() {
             src={selectedImage || product.image}
             alt={product.name}
           />
+          <ListGroup.Item>
+            <Row xs={3} md={6} className="g-2">
+              {[product.image, ...product.images].map((x) => (
+                <Col key={x}>
+                  <Card>
+                    <Button
+                      className="thumbnail"
+                      type="button"
+                      variant="light"
+                      onClick={() => setSelectedImage(x)}
+                    >
+                      <Card.Img variant="top" src={x} alt="Product Image" />
+                    </Button>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </ListGroup.Item>
         </Col>
-        <Col md={3}>
-          <ListGroup variant="flush">
-            <ListGroup.Item>
-              <Helmet>
-                <title>{product.name}</title>
-              </Helmet>
-              <h1>{product.name}</h1>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <Rating
-                rating={product.rating}
-                numReviews={product.numReviews}
-              ></Rating>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <p>Price: R{product.price}</p>
-            </ListGroup.Item>
-
-            <ListGroup.Item>
-              <Row xs={1} md={2} className="g-2">
-                {[product.image, ...product.images].map((x) => (
-                  <Col key={x}>
-                    <Card>
-                      <Button
-                        className="thumbnail"
-                        type="button"
-                        variant="light"
-                        onClick={() => setSelectedImage(x)}
-                      >
-                        <Card.Img variant="top" src={x} alt="Product Image" />
-                      </Button>
-                    </Card>
-                  </Col>
-                ))}
-              </Row>
-            </ListGroup.Item>
-
-            <ListGroup.Item>
-              <h5>Description:</h5>
-              <p>{product.description}</p>
-            </ListGroup.Item>
-          </ListGroup>
-        </Col>
-        <Col md={3}>
-          <Card>
-            <Card.Body>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Price:</Col>
-                    <Col>R{product.price}</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Status:</Col>
-                    <Col>
-                      {product.countInStock > 0 ? (
-                        <Badge bg="success">In Stock</Badge>
-                      ) : (
-                        <Badge bg="danger">Unavailable</Badge>
-                      )}
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
-                {product.countInStock > 0 && (
+        <Col md={6}>
+          <Helmet>
+            <title>{product.name}</title>
+          </Helmet>
+          <div className="mb-3">
+            <h1>{product.name}</h1>
+            <h3>R{product.price}</h3>
+          </div>
+          <div className="mb-3">
+            <Rating
+              rating={product.rating}
+              numReviews={product.numReviews}
+              className="my-3"
+            ></Rating>
+          </div>
+          <div className="mb-3">
+            <Card>
+              <Card.Body>
+                <ListGroup variant="flush">
                   <ListGroup.Item>
-                    <div className="d-grid">
-                      <Button onClick={addToCartHandler} variant="primary">
-                        Add to Cart
-                      </Button>
-                    </div>
+                    <Row>
+                      <Col>Availability:</Col>
+                      <Col className="justify-content-end">
+                        {product.countInStock > 0 ? (
+                          <Badge bg="success">In Stock</Badge>
+                        ) : (
+                          <Badge bg="danger">Unavailable</Badge>
+                        )}
+                      </Col>
+                    </Row>
                   </ListGroup.Item>
-                )}
-              </ListGroup>
-            </Card.Body>
-          </Card>
+                  {product.countInStock > 0 && (
+                    <ListGroup.Item>
+                      <div className="d-grid">
+                        <Button onClick={addToCartHandler} variant="primary">
+                          Add to Cart
+                        </Button>
+                      </div>
+                    </ListGroup.Item>
+                  )}
+                </ListGroup>
+              </Card.Body>
+            </Card>
+          </div>
+          <div className="mb-3">
+            <h5>Description:</h5>
+            <p>{product.description}</p>
+          </div>
         </Col>
       </Row>
       <div className="mb-3">
