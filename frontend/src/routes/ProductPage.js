@@ -133,14 +133,14 @@ function ProductPage() {
   ) : (
     <div>
       <Row>
-        <Col md={6}>
+        <Col md={6} className="mb-3">
           <img
             className="image-large"
             src={selectedImage || product.image}
             alt={product.name}
           />
           <ListGroup.Item>
-            <Row xs={3} md={6} className="g-2">
+            <Row xs={5} md={8} className="g-2">
               {[product.image, ...product.images].map((x) => (
                 <Col key={x}>
                   <Card>
@@ -180,7 +180,7 @@ function ProductPage() {
                   <ListGroup.Item>
                     <Row>
                       <Col>Availability:</Col>
-                      <Col className="justify-content-end">
+                      <Col className="text-end">
                         {product.countInStock > 0 ? (
                           <Badge bg="success">In Stock</Badge>
                         ) : (
