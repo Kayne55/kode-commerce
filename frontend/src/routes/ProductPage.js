@@ -17,6 +17,7 @@ import MessageBox from '../components/MessageBox';
 import { getError } from '../utils';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
+import Container from 'react-bootstrap/Container';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -131,7 +132,7 @@ function ProductPage() {
   ) : error ? (
     <MessageBox variant="warning">{error}</MessageBox>
   ) : (
-    <div>
+    <Container className="my-5">
       <Row>
         <Col md={6} className="mb-3">
           <img
@@ -281,7 +282,7 @@ function ProductPage() {
           )}
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
 

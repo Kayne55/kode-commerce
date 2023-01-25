@@ -1,0 +1,51 @@
+@import 'ks-theme.scss';
+
+.ks-hero {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  background-color: #303030;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+}
+
+.ks-hero p {
+  font-family: $font-body;
+  font-weight: 100;
+  color: white;
+  text-align: right;
+}
+
+.ks-hero-heading {
+  display: flex;
+  align-items: flex-end;
+}
+
+.ks-hero-heading-divider {
+  flex: 50%;
+  width: 100%;
+  height: 4px;
+  background-color: $color-primary;
+}
+
+.ks-hero-heading,
+.ks-hero-subheading {
+  text-transform: uppercase;
+}
+
+.ks-hero-heading h1 {
+  font-family: $font-heading;
+  font-size: 5rem;
+  color: #fff;
+  line-height: 1;
+}
+
+.ks-hero-subheading {
+  font-family: $font-body;
+  font-size: 2rem;
+  font-weight: 100;
+  color: $color-primary;
+}

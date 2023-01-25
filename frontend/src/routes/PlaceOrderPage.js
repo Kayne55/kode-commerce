@@ -12,6 +12,7 @@ import { getError } from '../utils.js';
 import { Store } from '../Store';
 import CheckoutSteps from '../components/CheckoutSteps';
 import LoadingBox from '../components/LoadingBox';
+import Container from 'react-bootstrap/Container';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -80,7 +81,7 @@ export default function PlaceOrderPage() {
     }
   }, [cart, navigate]);
   return (
-    <div>
+    <Container className="my-5">
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
       <Helmet>
         <title>Preview Order</title>
@@ -188,6 +189,6 @@ export default function PlaceOrderPage() {
           </Card>
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 }

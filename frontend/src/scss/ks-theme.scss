@@ -1,0 +1,96 @@
+// Colors
+$color-primary: #11bab8;
+$color-secondary: #1961ae;
+$color-accent-blue: #1297c4;
+$color-accent-orange: #ff6b1a;
+$color-blue: #1239c4;
+$color-darkblue: #1811ba;
+$color-black: #111;
+$color-darkgrey: #555;
+$color-grey: #777;
+$color-lightgrey: #999;
+
+$color-success: rgb(20, 192, 89);
+$color-danger: #e44c4c;
+$color-warning: #ffc765;
+$color-info: ligthen($color-secondary, 50%);
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+$font-body: 'Open Sans', sans-serif !important;
+$font-heading: 'Anton' !important;
+
+// Font Colors
+
+.ks-text-primary {
+  color: $color-primary !important;
+}
+
+.ks-text-secondary {
+  color: $color-secondary !important;
+}
+
+.ks-text-accent-blue {
+  color: $color-accent-blue !important;
+}
+
+.ks-text-accent-orange {
+  color: $color-accent-orange !important;
+}
+
+.ks-text-red {
+  color: $color-danger !important;
+}
+
+.ks-text-white {
+  color: #fff !important;
+}
+
+.ks-text-grey {
+  color: $color-grey !important;
+}
+
+.ks-text-lightgrey {
+  color: $color-lightgrey !important;
+}
+
+.ks-text-darkgrey {
+  color: $color-darkgrey !important;
+}
+
+.ks-text-black {
+  color: $color-black !important;
+}
+
+// Background Colors
+
+.ks-bg-primary {
+  background-color: $color-primary !important;
+}
+
+.ks-bg-secondary {
+  background-color: $color-secondary !important;
+}
+
+.ks-bg-accent-blue {
+  background-color: $color-accent-blue !important;
+}
+
+.ks-bg-accent-orange {
+  background-color: $color-accent-orange !important;
+}
+
+// Borders and Dividers
+.ks-hr-primary {
+  border-color: $color-primary !important;
+}
+.ks-hr-secondary {
+  border-color: $color-secondary !important;
+}
+.ks-hr-accent-blue {
+  border-color: $color-accent-blue !important;
+}
+.ks-hr-accent-orange {
+  border-color: $color-accent-orange !important;
+}

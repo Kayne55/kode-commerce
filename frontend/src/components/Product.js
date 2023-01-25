@@ -1,10 +1,10 @@
+import axios from 'axios';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import Rating from './Rating';
 import { useContext } from 'react';
 import { Store } from '../Store';
-import axios from 'axios';
+import '../scss/product-card.scss';
 
 function Product(props) {
   const { product } = props;
@@ -26,9 +26,11 @@ function Product(props) {
     });
   };
 
+  const addToWishlistHandler = () => {};
+
   return (
-    <Card key={product.slug} className="mb-3 kode-product-card">
-      <div className="kode-product-card-img">
+    <Card key={product.slug} className="mb-3 ks-product-card">
+      <div className="ks-product-card-img">
         <Link to={`/product/${product.slug}`}>
           <img
             className="card-img-top"
@@ -38,21 +40,41 @@ function Product(props) {
         </Link>
       </div>
       <Card.Body>
-        <Link to={`/product/${product.slug}`}>
-          <Card.Title className="kode-product-card-title">
-            {product.name}
-          </Card.Title>
-        </Link>
-        <Rating rating={product.rating} numReviews={product.numReviews} />
-        <Card.Text>R{product.price}</Card.Text>
-        {product.countInStock === 0 ? (
-          <Button variant="light" disabled>
-            Out of Stock
-          </Button>
+        <Card.Title className="ks-product-card-title">
+          <Link to={`/product/${product.slug}`}>{product.name}</Link>
+        </Card.Title>
+        {product.numReviews === 0 ? (
+          <span>No rating</span>
         ) : (
-          <Button onClick={() => addToCartHandler(product)}>Add to Cart</Button>
+          <Rating
+            rating={product.rating}
+            numReviews={product.numReviews}
+            caption=" "
+          />
         )}
+        <Card.Text className="text-end">
+          <strong>R{product.price}</strong>
+        </Card.Text>
       </Card.Body>
+      <Card.Footer className="ks-product-card-footer">
+        {product.countInStock === 0 ? (
+          <button disabled>Out of Stock</button>
+        ) : (
+          <button
+            className="ks-product-card-btn-ac"
+            onClick={() => addToCartHandler(product)}
+          >
+            <i className="fas fa-cart-plus"></i> Add to Cart
+          </button>
+        )}
+
+        <button
+          className="ks-product-card-btn-wl"
+          onClick={() => addToWishlistHandler(product)}
+        >
+          <i className="far fa-heart ks-text-red"></i> Wishlist
+        </button>
+      </Card.Footer>
     </Card>
   );
 }

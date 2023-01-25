@@ -1,0 +1,61 @@
+@import './ks-theme.scss';
+
+.ks-section {
+  display: flex;
+  position: relative;
+}
+
+.ks-section-fullwidth {
+  display: flex;
+  flex-direction: column;
+  padding: 80px 10%;
+}
+
+.ks-section-body-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-primary;
+  padding: 80px 0 80px 10%;
+}
+
+.ks-section-image-right {
+  flex: 1;
+  padding: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.ks-section-heading {
+  display: flex;
+}
+
+.ks-section-heading hr {
+  margin: 0;
+  border: 0;
+  border-bottom: solid 2px black;
+  opacity: 1;
+  flex: auto;
+}
+
+.ks-section-heading h2 {
+  font-size: 3rem;
+  font-family: $font-heading;
+  line-height: 1;
+}
+
+.ks-section-subheading {
+  font-family: $font-body;
+  font-size: 1.2rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.ks-section-body-text {
+  align-self: center;
+  flex: 50%;
+  display: grid;
+  align-items: center;
+  padding: 20px 5% 20px 0;
+}

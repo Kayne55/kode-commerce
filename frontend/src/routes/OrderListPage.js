@@ -10,6 +10,7 @@ import { getError } from '../utils';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Spinner from 'react-bootstrap/Spinner';
+import Container from 'react-bootstrap/Container';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -88,7 +89,7 @@ export default function OrderListPage() {
   };
 
   return (
-    <div>
+    <Container className="my-5">
       <Helmet>
         <title>Orders</title>
       </Helmet>
@@ -157,6 +158,6 @@ export default function OrderListPage() {
           </tbody>
         </Table>
       )}
-    </div>
+    </Container>
   );
 }

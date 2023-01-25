@@ -9,6 +9,7 @@ import { Store } from '../Store';
 import CheckoutSteps from '../components/CheckoutSteps';
 import MapSearch from '../components/MapSearch';
 import axios from 'axios';
+import Container from 'react-bootstrap/Container';
 
 export default function ShippingAddressPage() {
   const navigate = useNavigate();
@@ -72,7 +73,7 @@ export default function ShippingAddressPage() {
   const handleShow = () => setShow(true);
 
   return (
-    <div>
+    <Container className="my-5">
       <Helmet>
         <title>Shipping Address</title>
       </Helmet>
@@ -165,6 +166,6 @@ export default function ShippingAddressPage() {
           </Modal.Footer> */}
         </Modal>
       </div>
-    </div>
+    </Container>
   );
 }

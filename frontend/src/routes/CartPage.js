@@ -9,6 +9,7 @@ import Card from 'react-bootstrap/Card';
 import MessageBox from '../components/MessageBox';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Container from 'react-bootstrap/Container';
 
 export default function CartPage() {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ export default function CartPage() {
   };
 
   return (
-    <div>
+    <Container className="my-5">
       <Helmet>
         <title>Shopping Cart</title>
       </Helmet>
@@ -129,6 +130,6 @@ export default function CartPage() {
           </Card>
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 }

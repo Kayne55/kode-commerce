@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import Table from 'react-bootstrap/Table';
 import { Helmet } from 'react-helmet-async';
@@ -85,7 +86,7 @@ export default function UserListPage() {
   };
 
   return (
-    <div>
+    <Container className="my-5">
       <Helmet>
         <title>Users</title>
       </Helmet>
@@ -144,6 +145,6 @@ export default function UserListPage() {
           </tbody>
         </Table>
       )}
-    </div>
+    </Container>
   );
 }

@@ -8,6 +8,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
+import Container from 'react-bootstrap/Container';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -50,7 +51,7 @@ export default function OrderHistoryPage() {
     fetchData();
   }, [userInfo]);
   return (
-    <div>
+    <Container className="my-5">
       <Helmet>
         <title>Order History</title>
       </Helmet>
@@ -99,6 +100,6 @@ export default function OrderHistoryPage() {
           </tbody>
         </Table>
       )}
-    </div>
+    </Container>
   );
 }

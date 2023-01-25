@@ -12,6 +12,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { toast } from 'react-toastify';
 import { getError } from '../utils.js';
+import Container from 'react-bootstrap/Container';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -106,7 +107,7 @@ export default function ProductListPage() {
   };
 
   return (
-    <div>
+    <Container className="my-5">
       <Row>
         <Col>
           <h1>Products</h1>
@@ -206,6 +207,6 @@ export default function ProductListPage() {
           </Modal> */}
         </>
       )}
-    </div>
+    </Container>
   );
 }

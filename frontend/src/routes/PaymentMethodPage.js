@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { Store } from '../Store';
 import { useNavigate } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
 
 export default function PaymentMethodPage() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default function PaymentMethodPage() {
     }
   }, [shippingAddress, navigate]);
   return (
-    <div>
+    <Container className="my-5">
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
       <div className="container small-container">
         <Helmet>
@@ -60,6 +61,6 @@ export default function PaymentMethodPage() {
           </div>
         </Form>
       </div>
-    </div>
+    </Container>
   );
 }

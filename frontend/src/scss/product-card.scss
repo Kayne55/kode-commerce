@@ -1,0 +1,62 @@
+@import './ks-theme.scss';
+
+.ks-product-card {
+  border-radius: 0;
+}
+
+.ks-product-card-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ks-product-card-title a {
+  color: $color-darkgrey;
+  text-decoration: none;
+}
+
+.ks-product-card-title a:hover {
+  color: $color-primary;
+}
+
+.ks-product-card-img {
+  overflow: hidden;
+}
+
+.ks-product-card-footer {
+  background-color: #fff;
+  padding: 0;
+  display: flex;
+}
+
+.ks-product-card-footer button {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  border: none;
+  padding: 8px;
+  width: 100%;
+  flex: 50% 1;
+  transition: all 0.2s;
+}
+
+.ks-product-card-btn-ac {
+  color: #fff;
+  text-transform: uppercase;
+  background-color: $color-secondary;
+}
+
+.ks-product-card-btn-ac:hover {
+  background-color: $color-primary;
+}
+
+.ks-product-card-btn-wl {
+  color: $color-darkgrey;
+  text-transform: uppercase;
+  background-color: #fff;
+}
+
+.ks-product-card-btn-wl:hover {
+  color: #fff;
+  background-color: $color-lightgrey;
+}

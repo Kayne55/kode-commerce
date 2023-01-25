@@ -8,6 +8,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
+import Container from 'react-bootstrap/Container';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -55,7 +56,7 @@ export default function DashboardPage() {
   }, [userInfo]);
 
   return (
-    <div>
+    <Container className="my-5">
       <h1>Dashboard</h1>
       {loading ? (
         <LoadingBox />
@@ -138,6 +139,6 @@ export default function DashboardPage() {
           </div>
         </>
       )}
-    </div>
+    </Container>
   );
 }

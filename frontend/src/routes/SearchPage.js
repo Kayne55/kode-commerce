@@ -13,6 +13,7 @@ import Rating from '../components/Rating';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Product from '../components/Product';
+import Container from 'react-bootstrap/Container';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -144,7 +145,7 @@ export default function SearchPage() {
   };
 
   return (
-    <div>
+    <Container className="my-5">
       <Helmet>
         <title>Search Products</title>
       </Helmet>
@@ -307,6 +308,6 @@ export default function SearchPage() {
           )}
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 }

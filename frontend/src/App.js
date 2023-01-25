@@ -36,6 +36,7 @@ import ProductAddPage from './routes/ProductAddPage';
 import OrderListPage from './routes/OrderListPage';
 import UserListPage from './routes/UserListPage';
 import UserEditPage from './routes/UserEditPage';
+import './scss/ks-nav.scss';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -67,7 +68,7 @@ function App() {
       <div className="d-flex flex-column site-container">
         <ToastContainer position="bottom-center" limit={1} />
         <header>
-          <Navbar bg="dark" variant="dark" expand="lg">
+          <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
             <Container>
               <Button
                 variant="dark"
@@ -76,22 +77,39 @@ function App() {
                 <i className="fas fa-bars"></i>
               </Button>
               <LinkContainer to="/">
-                <Navbar.Brand>Kode Store</Navbar.Brand>
+                <Navbar.Brand className="ks-brand">
+                  kodestore<span className="ks-text-primary">.</span>
+                </Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
-                <SearchBox />
                 <Nav className="me-auto w-100 justify-content-end">
-                  <Link to="/cart" className="nav-link">
-                    Cart
+                  <Link to="/cart" className="nav-link position-relative">
+                    <span className="visually-hidden">Cart</span>
+                    <i className="fas fa-shopping-cart"></i>
                     {cart.cartItems.length > 0 && (
-                      <Badge pill bg="success">
-                        {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                      <Badge
+                        pill
+                        bg="danger"
+                        className="position-absolute translate-middle badge rounded-pill"
+                      >
+                        <small>
+                          {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                        </small>
                       </Badge>
                     )}
                   </Link>
                   {userInfo ? (
-                    <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                    <NavDropdown
+                      title={<i className="fas fa-user"></i>}
+                      id="basic-nav-dropdown"
+                      menuVariant="dark"
+                    >
+                      <li>
+                        <h6 className="dropdown-header">
+                          <i className="fas fa-user"></i> {userInfo.name}
+                        </h6>
+                      </li>
                       <LinkContainer to="/profile">
                         <NavDropdown.Item>User Profile</NavDropdown.Item>
                       </LinkContainer>
@@ -104,16 +122,26 @@ function App() {
                         to="/#signout"
                         onClick={signoutHandler}
                       >
-                        Sign Out
+                        Sign Out <i className="fas fa-sign-out-alt"></i>
                       </Link>
                     </NavDropdown>
                   ) : (
                     <Link className="nav-link" to="/signin">
-                      Sign In
+                      <span className="visually-hidden">Sign In</span>
+                      <i className="fas fa-sign-in-alt"></i>
                     </Link>
                   )}
                   {userInfo && userInfo.isAdmin && (
-                    <NavDropdown title="Admin" id="admin-nav-dropdown">
+                    <NavDropdown
+                      title={<i className="fas fa-tachometer-alt"></i>}
+                      id="admin-nav-dropdown"
+                      menuVariant="dark"
+                    >
+                      <li>
+                        <h6 className="dropdown-header">
+                          <i className="fas fa-toolbox"></i> Admin Dashboard
+                        </h6>
+                      </li>
                       <LinkContainer to="/admin/dashboard">
                         <NavDropdown.Item>Dashboard</NavDropdown.Item>
                       </LinkContainer>
@@ -134,101 +162,99 @@ function App() {
           </Navbar>
         </header>
 
-        <main className="mt-3">
-          <Container>
-            <Routes>
-              <Route path="/product/:slug" element={<ProductPage />} />
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/signin" element={<SigninPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute>
-                    <ProfilePage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/placeorder" element={<PlaceOrderPage />} />
-              <Route
-                path="/order/:id"
-                element={
-                  <ProtectedRoute>
-                    <OrderPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/orderhistory"
-                element={
-                  <ProtectedRoute>
-                    <OrderHistoryPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/shipping" element={<ShippingAddressPage />} />
-              <Route path="/payment" element={<PaymentMethodPage />} />
-              {/* Admin Routes */}
-              <Route
-                path="/admin/dashboard"
-                element={
-                  <AdminRoute>
-                    <DashboardPage />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/products"
-                element={
-                  <AdminRoute>
-                    <ProductListPage />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/addproduct"
-                element={
-                  <AdminRoute>
-                    <ProductAddPage />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/product/:id"
-                element={
-                  <AdminRoute>
-                    <ProductEditPage />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/user/:id"
-                element={
-                  <AdminRoute>
-                    <UserEditPage />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/orders"
-                element={
-                  <AdminRoute>
-                    <OrderListPage />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/users"
-                element={
-                  <AdminRoute>
-                    <UserListPage />
-                  </AdminRoute>
-                }
-              />
-              <Route path="/" element={<HomePage />} />
-            </Routes>
-          </Container>
+        <main>
+          <Routes>
+            <Route path="/product/:slug" element={<ProductPage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/signin" element={<SigninPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/placeorder" element={<PlaceOrderPage />} />
+            <Route
+              path="/order/:id"
+              element={
+                <ProtectedRoute>
+                  <OrderPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/orderhistory"
+              element={
+                <ProtectedRoute>
+                  <OrderHistoryPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/shipping" element={<ShippingAddressPage />} />
+            <Route path="/payment" element={<PaymentMethodPage />} />
+            {/* Admin Routes */}
+            <Route
+              path="/admin/dashboard"
+              element={
+                <AdminRoute>
+                  <DashboardPage />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/products"
+              element={
+                <AdminRoute>
+                  <ProductListPage />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/addproduct"
+              element={
+                <AdminRoute>
+                  <ProductAddPage />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/product/:id"
+              element={
+                <AdminRoute>
+                  <ProductEditPage />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/user/:id"
+              element={
+                <AdminRoute>
+                  <UserEditPage />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/orders"
+              element={
+                <AdminRoute>
+                  <OrderListPage />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/users"
+              element={
+                <AdminRoute>
+                  <UserListPage />
+                </AdminRoute>
+              }
+            />
+            <Route path="/" element={<HomePage />} />
+          </Routes>
         </main>
         <div>
           <Offcanvas
@@ -239,6 +265,7 @@ function App() {
               <Offcanvas.Title>Categories</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
+              <SearchBox />
               <Nav>
                 {/* <Nav.Item>
                   <h4>Categories</h4>

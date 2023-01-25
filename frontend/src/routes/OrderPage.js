@@ -14,6 +14,7 @@ import { getError } from '../utils';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Button from 'react-bootstrap/esm/Button';
+import Container from 'react-bootstrap/Container';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -189,7 +190,7 @@ export default function OrderPage() {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div>
+    <Container className="my-5">
       <Helmet>
         <title>Order {orderId}</title>
       </Helmet>
@@ -329,6 +330,6 @@ export default function OrderPage() {
           </Card>
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 }
