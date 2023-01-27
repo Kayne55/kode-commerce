@@ -52,6 +52,7 @@ function App() {
 
   const [sidebarIsOpen, setSideBarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -62,13 +63,28 @@ function App() {
       }
     };
     fetchCategories();
+    const fetchBrands = async () => {
+      try {
+        const { data } = await axios.get(`/api/products/brands`);
+        setBrands(data);
+      } catch (err) {
+        toast.error(getError(err));
+      }
+    };
+    fetchBrands();
   }, []);
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
         <ToastContainer position="bottom-center" limit={1} />
         <header>
-          <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
+          <Navbar
+            className="ks-navbar"
+            bg="dark"
+            variant="dark"
+            expand="lg"
+            sticky="top"
+          >
             <Container>
               <Button
                 variant="dark"
@@ -77,12 +93,12 @@ function App() {
                 <i className="fas fa-bars"></i>
               </Button>
               <LinkContainer to="/">
-                <Navbar.Brand className="ks-brand">
+                <Navbar.Brand className="ks-brand  flex-grow-1">
                   kodestore<span className="ks-text-primary">.</span>
                 </Navbar.Brand>
               </LinkContainer>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
+              {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
+              <Navbar id="basic-navbar-nav">
                 <Nav className="me-auto w-100 justify-content-end">
                   <Link to="/cart" className="nav-link position-relative">
                     <span className="visually-hidden">Cart</span>
@@ -104,12 +120,14 @@ function App() {
                       title={<i className="fas fa-user"></i>}
                       id="basic-nav-dropdown"
                       menuVariant="dark"
+                      align="end"
                     >
                       <li>
                         <h6 className="dropdown-header">
                           <i className="fas fa-user"></i> {userInfo.name}
                         </h6>
                       </li>
+                      <NavDropdown.Divider />
                       <LinkContainer to="/profile">
                         <NavDropdown.Item>User Profile</NavDropdown.Item>
                       </LinkContainer>
@@ -136,12 +154,14 @@ function App() {
                       title={<i className="fas fa-tachometer-alt"></i>}
                       id="admin-nav-dropdown"
                       menuVariant="dark"
+                      align="end"
                     >
                       <li>
                         <h6 className="dropdown-header">
                           <i className="fas fa-toolbox"></i> Admin Dashboard
                         </h6>
                       </li>
+                      <NavDropdown.Divider />
                       <LinkContainer to="/admin/dashboard">
                         <NavDropdown.Item>Dashboard</NavDropdown.Item>
                       </LinkContainer>
@@ -157,7 +177,7 @@ function App() {
                     </NavDropdown>
                   )}
                 </Nav>
-              </Navbar.Collapse>
+              </Navbar>
             </Container>
           </Navbar>
         </header>
@@ -258,14 +278,18 @@ function App() {
         </main>
         <div>
           <Offcanvas
+            className="ks-offcanvas-primary"
             show={sidebarIsOpen}
             onHide={() => setSideBarIsOpen(false)}
           >
             <Offcanvas.Header closeButton>
-              <Offcanvas.Title>Categories</Offcanvas.Title>
+              <Offcanvas.Title> </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
+              <h6>SEARCH PRODUCTS:</h6>
               <SearchBox />
+              <br />
+              <h6>PRODUCT CATEGORIES:</h6>
               <Nav>
                 {/* <Nav.Item>
                   <h4>Categories</h4>
@@ -281,6 +305,28 @@ function App() {
                         onClick={() => setSideBarIsOpen(false)}
                       >
                         <Nav.Link>{category}</Nav.Link>
+                      </LinkContainer>
+                    </Nav.Item>
+                  ))}
+                </Nav.Item>
+              </Nav>
+              <hr />
+              <h6>BRANDS:</h6>
+              <Nav>
+                {/* <Nav.Item>
+                  <h4>Categories</h4>
+                </Nav.Item> */}
+                <Nav.Item>
+                  {brands.map((brand) => (
+                    <Nav.Item key={brand}>
+                      <LinkContainer
+                        to={{
+                          pathname: '/search',
+                          search: `brand=${brand}`,
+                        }}
+                        onClick={() => setSideBarIsOpen(false)}
+                      >
+                        <Nav.Link>{brand}</Nav.Link>
                       </LinkContainer>
                     </Nav.Item>
                   ))}

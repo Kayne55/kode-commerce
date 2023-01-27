@@ -1,0 +1,22 @@
+@import './ks-theme.scss';
+
+.ks-form .form-control {
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid black;
+}
+
+.ks-form button {
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.ks-form button > i {
+  color: black;
+}
+
+.ks-form button:hover > i {
+  color: $color-secondary;
+}

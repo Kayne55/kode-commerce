@@ -7,3 +7,26 @@
 .ks-text-primary {
   color: $color-primary;
 }
+
+.ks-navbar .navbar-nav .show > .nav-link {
+  color: $color-primary;
+}
+
+// Offcanvas Menus
+
+.ks-offcanvas-primary {
+  background-color: $color-primary;
+}
+
+.ks-offcanvas-primary .offcanvas-title {
+  font-family: $font-heading;
+  text-transform: uppercase;
+}
+
+.ks-offcanvas-primary a {
+  color: #fff;
+}
+
+.ks-offcanvas-primary a:hover {
+  color: $color-blue;
+}
