@@ -160,6 +160,7 @@ productRouter.get(
           }
         : {};
     const categoryFilter = category && category !== 'all' ? { category } : {};
+    const brandFilter = brand && brand !== 'all' ? { brand } : {};
     const ratingFilter =
       rating && rating !== 'all'
         ? {
@@ -193,6 +194,7 @@ productRouter.get(
     const products = await Product.find({
       ...queryFilter,
       ...categoryFilter,
+      ...brandFilter,
       ...ratingFilter,
       ...priceFilter,
     })
@@ -203,6 +205,7 @@ productRouter.get(
     const countProducts = await Product.countDocuments({
       ...queryFilter,
       ...categoryFilter,
+      ...brandFilter,
       ...priceFilter,
       ...ratingFilter,
     });
@@ -221,6 +224,14 @@ productRouter.get(
   expressAsyncHandler(async (req, res) => {
     const categories = await Product.find().distinct('category');
     res.send(categories);
+  })
+);
+
+productRouter.get(
+  '/brands',
+  expressAsyncHandler(async (req, res) => {
+    const brands = await Product.find().distinct('brand');
+    res.send(brands);
   })
 );
 
