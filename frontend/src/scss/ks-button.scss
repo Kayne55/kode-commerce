@@ -1,14 +1,22 @@
 @import '../scss/ks-theme.scss';
 
 .ks-btn {
+  line-height: 1;
   background-color: transparent;
-  padding: 15px 25px 15px 0;
+  padding: 0;
+  margin: 15px 0;
   cursor: pointer;
 }
 
+.ks-btn,
 .ks-btn a {
   text-decoration: none;
   position: relative;
+}
+
+.ks-btn:hover,
+.ks-btn:active {
+  background-color: transparent !important;
 }
 
 .ks-btn-primary-light a {
@@ -33,12 +41,13 @@
 
 .ks-btn-icon {
   color: $color-primary;
-  position: absolute;
+  position: relative;
   right: -30px;
   bottom: 0;
   transition: all 0.2s;
 }
 
+.ks-btn:hover > .ks-btn-icon,
 .ks-btn > a:hover > .ks-btn-icon {
   right: -40px;
 }

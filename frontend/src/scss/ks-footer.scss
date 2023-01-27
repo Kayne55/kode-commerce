@@ -1,0 +1,172 @@
+@import './ks-theme.scss';
+
+.ks-footer {
+  color: #fff;
+  background-color: $color-black;
+  padding: 50px 10%;
+}
+
+.ks-footer h3,
+.ks-footer p {
+  color: #fff;
+}
+
+.ks-footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.ks-footer .ks-brand {
+  font-size: 2rem;
+  color: #fff;
+  position: relative;
+  margin: 0 25px 0 0;
+  bottom: -25px;
+}
+
+.ks-footer .ks-section-heading hr {
+  border: 0;
+  border-bottom: 2px solid $color-primary;
+}
+
+.ks-footer-subscribe {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  padding-right: 30px;
+  border-bottom: 2px solid $color-primary;
+}
+
+.ks-footer-subscribe input {
+  color: #fff;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.ks-footer-subscribe input:focus {
+  color: #fff;
+  background-color: transparent;
+}
+
+.ks-footer-subscribe-form {
+  display: flex;
+}
+
+.ks-footer-subscribe-form h3 {
+  font-family: $font-heading;
+  align-self: center;
+  margin: 0;
+}
+
+.ks-footer button {
+  font-family: $font-body;
+  font-size: 1.2rem;
+  background-color: transparent;
+}
+
+.ks-footer button > i {
+  color: $color-primary;
+}
+
+.ks-footer-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.ks-footer-menu li {
+  font-family: $font-body;
+  font-weight: 100;
+  margin: 15px 0;
+}
+
+.ks-footer-menu a {
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+}
+
+.ks-footer-menu a::after {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  content: '\f061';
+  color: $color-primary;
+  position: relative;
+  left: 0;
+  visibility: hidden;
+  transition: all 0.2s;
+}
+
+.ks-footer-menu a:hover::after {
+  left: 20px;
+  visibility: visible;
+}
+
+.ks-footer-social {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+
+.ks-footer-social h3 {
+  font-family: $font-heading;
+  font-size: 3rem;
+}
+
+.ks-footer-social h4 {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.ks-footer-social-icons ul {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  list-style: none;
+  padding: 0;
+}
+
+.ks-footer-social-icons i {
+  font-size: 2.8rem;
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 992px) {
+  .ks-footer {
+    padding: 50px 5%;
+  }
+  .ks-footer .ks-brand {
+    position: relative;
+    bottom: 0px;
+  }
+  .ks-footer-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ks-footer-subscribe-form h3 {
+    white-space: nowrap;
+  }
+  .ks-footer-subscribe,
+  .ks-footer-subscribe-form,
+  .ks-footer-subscribe-form form {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .ks-footer {
+    padding: 50px 2%;
+  }
+  .ks-footer .ks-brand {
+    font-size: 22vw;
+  }
+  .ks-footer-subscribe-form {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 20px;
+  }
+  .ks-footer-subscribe-form h3 {
+    align-self: flex-start;
+  }
+}

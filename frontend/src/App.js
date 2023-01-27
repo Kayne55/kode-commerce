@@ -37,6 +37,7 @@ import OrderListPage from './routes/OrderListPage';
 import UserListPage from './routes/UserListPage';
 import UserEditPage from './routes/UserEditPage';
 import './scss/ks-nav.scss';
+import Footer from './components/Footer';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -94,7 +95,7 @@ function App() {
               </Button>
               <LinkContainer to="/">
                 <Navbar.Brand className="ks-brand  flex-grow-1">
-                  kodestore<span className="ks-text-primary">.</span>
+                  motostop<span className="ks-text-primary">.</span>
                 </Navbar.Brand>
               </LinkContainer>
               {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
@@ -335,11 +336,7 @@ function App() {
             </Offcanvas.Body>
           </Offcanvas>
         </div>
-        <footer>
-          <div className="text-center">
-            <p>Copyright 2022 Kode Store. All Rights Reserved.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </BrowserRouter>
   );
