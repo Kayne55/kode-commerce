@@ -87,6 +87,7 @@ export default function SearchPage() {
   const { search } = useLocation();
   const sp = new URLSearchParams(search); // get the URL Params: example: /search?category=Shirts
   const category = sp.get('category') || 'all';
+  const brand = sp.get('brand') || 'all';
   const query = sp.get('query') || 'all';
   const price = sp.get('price') || 'all';
   const rating = sp.get('rating') || 'all';
@@ -103,7 +104,7 @@ export default function SearchPage() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
+          `/api/products/search?page=${page}&query=${query}&category=${category}&brand=${brand}&price=${price}&rating=${rating}&order=${order}`
         );
         dispatch({
           type: 'FETCH_SUCCESS',
@@ -117,10 +118,12 @@ export default function SearchPage() {
       }
     };
     fetchData();
-  }, [category, error, order, page, price, query, rating]);
+  }, [brand, category, error, order, page, price, query, rating]);
 
   const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
   useEffect(() => {
+    // Fetch the categories from the api and set them in the State.
     const fetchCategories = async () => {
       try {
         const { data } = await axios.get(`/api/products/categories`);
@@ -130,18 +133,29 @@ export default function SearchPage() {
       }
     };
     fetchCategories();
+    // Fetch the brands from the api and set them in the State.
+    const fetchBrands = async () => {
+      try {
+        const { data } = await axios.get(`/api/products/brands`);
+        setBrands(data);
+      } catch (err) {
+        toast.error(getError(err));
+      }
+    };
+    fetchBrands();
   }, [dispatch]);
 
   const getFilterUrl = (filter, skipPathname) => {
     const filterPage = filter.page || page;
     const filterCategory = filter.category || category;
+    const filterBrand = filter.brand || brand;
     const filterQuery = filter.query || query;
     const filterRating = filter.rating || rating;
     const filterPrice = filter.price || price;
     const sortOrder = filter.order || order;
     return `${
       skipPathname ? '' : '/search?'
-    }category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+    }category=${filterCategory}&brand=${filterBrand}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
 
   return (
@@ -153,7 +167,7 @@ export default function SearchPage() {
         <Col md={3}>
           <Card className="kode-search-filters">
             <Card.Body>
-              <h3>Department</h3>
+              <h3>Category</h3>
               <div>
                 <ul>
                   <li>
@@ -171,6 +185,29 @@ export default function SearchPage() {
                         to={getFilterUrl({ category: c })}
                       >
                         {c}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <h3>Brand</h3>
+              <div>
+                <ul>
+                  <li>
+                    <Link
+                      className={'all' === brand ? 'fw-bold' : ''}
+                      to={getFilterUrl({ brand: 'all' })}
+                    >
+                      Any
+                    </Link>
+                  </li>
+                  {brands.map((b) => (
+                    <li key={b}>
+                      <Link
+                        className={b === brand ? 'fw-bold' : ''}
+                        to={getFilterUrl({ brand: b })}
+                      >
+                        {b}
                       </Link>
                     </li>
                   ))}
@@ -240,10 +277,12 @@ export default function SearchPage() {
                     {countProducts === 0 ? 'No' : countProducts} Results
                     {query !== 'all' && ' : ' + query}
                     {category !== 'all' && ' : ' + category}
+                    {brand !== 'all' && ' : ' + brand}
                     {price !== 'all' && ' : Price ' + price}
                     {rating !== 'all' && ' : Rating ' + rating + ' & up'}
                     {query !== 'all' ||
                     category !== 'all' ||
+                    brand !== 'all' ||
                     rating !== 'all' ||
                     price !== 'all' ? (
                       <Button
