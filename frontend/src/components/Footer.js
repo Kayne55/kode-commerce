@@ -118,16 +118,16 @@ export default function Footer() {
             <div className="ks-footer-social-icons">
               <ul>
                 <li>
-                  <i class="fab fa-instagram"></i>
+                  <i className="fab fa-instagram"></i>
                 </li>
                 <li>
-                  <i class="fab fa-facebook-square"></i>
+                  <i className="fab fa-facebook-square"></i>
                 </li>
                 <li>
-                  <i class="fab fa-youtube"></i>
+                  <i className="fab fa-youtube"></i>
                 </li>
                 <li>
-                  <i class="fab fa-twitter"></i>
+                  <i className="fab fa-twitter"></i>
                 </li>
               </ul>
             </div>

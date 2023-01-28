@@ -10,6 +10,11 @@ productRouter.get('/', async (req, res) => {
   res.send(products);
 });
 
+productRouter.get('/featured', async (req, res) => {
+  const featuredProducts = await Product.find({ isFeatured: true });
+  res.send(featuredProducts);
+});
+
 productRouter.post(
   '/',
   isAuth,
