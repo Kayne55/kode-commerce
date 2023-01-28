@@ -25,6 +25,7 @@ productRouter.post(
       rating: 0,
       numReviews: 0,
       brand: req.body.brand,
+      isFeatured: req.body.isFeatured,
       countInStock: req.body.countInStock,
       description: req.body.description,
     });
@@ -49,6 +50,7 @@ productRouter.put(
       product.images = req.body.images;
       product.category = req.body.category;
       product.brand = req.body.brand;
+      product.isFeatured = req.body.isFeatured;
       product.countInStock = req.body.countInStock;
       product.description = req.body.description;
 

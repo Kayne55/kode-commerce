@@ -49,6 +49,7 @@ export default function AddProduct() {
   const [images, setImages] = useState([]);
   const [category, setCategory] = useState('');
   const [brand, setBrand] = useState('');
+  const [isFeatured, setIsFeatured] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const [description, setDescription] = useState('');
 
@@ -66,6 +67,7 @@ export default function AddProduct() {
           images,
           category,
           brand,
+          isFeatured,
           countInStock,
           description,
         },
@@ -228,6 +230,15 @@ export default function AddProduct() {
             rows={4}
             onChange={(e) => setDescription(e.target.value)}
             required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="isFeatured">
+          <Form.Check
+            value={isFeatured}
+            type="checkbox"
+            label="Featured Product"
+            onChange={(e) => setIsFeatured(e.target.checked)}
+            checked={isFeatured}
           />
         </Form.Group>
         <div className="mb-3">

@@ -61,6 +61,7 @@ export default function EditProduct() {
   const [category, setCategory] = useState('');
   const [brand, setBrand] = useState('');
   const [countInStock, setCountInStock] = useState('');
+  const [isFeatured, setIsFeatured] = useState('');
   const [description, setDescription] = useState('');
 
   useEffect(() => {
@@ -77,6 +78,7 @@ export default function EditProduct() {
         setImages(data.images);
         setCategory(data.category);
         setBrand(data.brand);
+        setIsFeatured(data.isFeatured);
         setCountInStock(data.countInStock);
         setDescription(data.description);
 
@@ -103,6 +105,7 @@ export default function EditProduct() {
           images,
           category,
           brand,
+          isFeatured,
           countInStock,
           description,
         },
@@ -252,6 +255,7 @@ export default function EditProduct() {
               required
             />
           </Form.Group>
+
           <Form.Group className="mb-3" controlId="countInStock">
             <Form.Label>Count In Stock</Form.Label>
             <Form.Control
@@ -261,6 +265,7 @@ export default function EditProduct() {
               required
             />
           </Form.Group>
+
           <Form.Group className="mb-3" controlId="description">
             <Form.Label>Product Description</Form.Label>
             <Form.Control
@@ -269,6 +274,15 @@ export default function EditProduct() {
               rows={4}
               onChange={(e) => setDescription(e.target.value)}
               required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="isFeatured">
+            <Form.Check
+              value={isFeatured}
+              type="checkbox"
+              label="Featured Product"
+              onChange={(e) => setIsFeatured(e.target.checked)}
+              checked={isFeatured}
             />
           </Form.Group>
           <div className="mb-3">
