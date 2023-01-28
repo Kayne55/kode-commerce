@@ -126,26 +126,29 @@ export default function EditProduct() {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
     bodyFormData.append('file', file);
-    try {
-      dispatch({ type: 'UPLOAD_REQUEST' });
-      const { data } = await axios.post('/api/upload', bodyFormData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      });
 
-      dispatch({ type: 'UPLOAD_SUCCESS' });
+    if (file !== undefined) {
+      try {
+        dispatch({ type: 'UPLOAD_REQUEST' });
+        const { data } = await axios.post('/api/upload', bodyFormData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        });
 
-      if (galleryImages) {
-        setImages([...images, data.secure_url]);
-      } else {
-        setImage(data.secure_url);
+        dispatch({ type: 'UPLOAD_SUCCESS' });
+
+        if (galleryImages) {
+          setImages([...images, data.secure_url]);
+        } else {
+          setImage(data.secure_url);
+        }
+        // toast.success('Images uploaded successfully!');
+      } catch (err) {
+        toast.error(getError(err));
+        dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
       }
-      toast.success('Images uploaded successfully!');
-    } catch (err) {
-      toast.error(getError(err));
-      dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
     }
   };
 
