@@ -4,6 +4,7 @@ import '../scss/main.scss';
 import '../scss/ks-page-section.scss';
 import KsButton from '../components/theme/KsButton';
 import FeaturedProducts from '../components/FeaturedProducts';
+import FeaturedCategory from '../components/FeaturedCategory';
 
 function HomePage() {
   const heroData = {
@@ -69,6 +70,47 @@ function HomePage() {
         </p>
         <div className="kode-products">
           <FeaturedProducts />
+        </div>
+      </section>
+
+      <section className="ks-section ks-section-fullwidth ks-section-borderless">
+        <div className="ks-cat-container ">
+          <FeaturedCategory
+            title="Track"
+            url="/search"
+            image="https://res.cloudinary.com/kodestore/image/upload/v1674999464/motorcycles-race-helmets-pilots-163210_s2wwoe.jpg"
+          />
+          <FeaturedCategory
+            title="Dirt"
+            url="/search"
+            image="https://res.cloudinary.com/kodestore/image/upload/v1674999479/pexels-photo-1161996_awfp9c.jpg"
+          />
+          <FeaturedCategory
+            title="Cruise"
+            url="/search"
+            image="https://res.cloudinary.com/kodestore/image/upload/v1674999530/pexels-photo-2519374_vtos6y.jpg"
+          />
+          <FeaturedCategory
+            title="Moto"
+            url="/search"
+            image="https://res.cloudinary.com/kodestore/image/upload/v1674999487/pexels-photo-217872_lbn1cw.jpg"
+          />
+          <FeaturedCategory
+            title="Commute"
+            url="/search"
+            image="https://res.cloudinary.com/kodestore/image/upload/v1674999744/pexels-photo-2377893_s3avex.jpg"
+          />
+          <FeaturedCategory
+            title="Adventure"
+            url="/search"
+            image="https://res.cloudinary.com/kodestore/image/upload/v1674999817/pexels-photo-2607330_gs88fh.jpg"
+          />
+          <FeaturedCategory
+            title="Touring"
+            url="/search"
+            image="https://res.cloudinary.com/kodestore/image/upload/v1674999292/pexels-photo-1416169_nfbhex.jpg"
+          />
+          <FeaturedCategory title="Shop All" url="/search" />
         </div>
       </section>
     </div>
