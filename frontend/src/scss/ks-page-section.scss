@@ -8,7 +8,7 @@
 .ks-section-fullwidth {
   display: flex;
   flex-direction: column;
-  padding: 80px 10%;
+  padding: 80px 5%;
 }
 
 .ks-section-borderless {
@@ -21,7 +21,7 @@
   display: flex;
   flex-direction: column;
   background-color: $color-primary;
-  padding: 80px 0 80px 10%;
+  padding: 80px 0 80px 5%;
 }
 
 .ks-section-image-right {
@@ -34,6 +34,14 @@
 
 .ks-section-heading {
   display: flex;
+}
+
+.ks-section-heading-left {
+  margin-right: -5.5%;
+}
+
+.ks-section-heading-right {
+  margin-left: -5.5%;
 }
 
 .ks-section-heading hr {

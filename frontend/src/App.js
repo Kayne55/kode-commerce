@@ -86,7 +86,7 @@ function App() {
             expand="lg"
             sticky="top"
           >
-            <Container>
+            <Container fluid className="ks-container-full">
               <Button
                 variant="dark"
                 onClick={() => setSideBarIsOpen(!sidebarIsOpen)}

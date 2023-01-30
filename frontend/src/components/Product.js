@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Rating from './Rating';
 import { useContext } from 'react';
 import { Store } from '../Store';
-import '../scss/product-card.scss';
+import '../scss/ks-product-card.scss';
 
 function Product(props) {
   const { product } = props;
@@ -30,15 +30,15 @@ function Product(props) {
 
   return (
     <Card key={product.slug} className="mb-3 ks-product-card">
-      <div className="ks-product-card-img">
-        <Link to={`/product/${product.slug}`}>
+      <Link to={`/product/${product.slug}`}>
+        <div className="ks-product-card-img">
           <img
             className="card-img-top"
             src={product.image}
             alt={product.name}
           />
-        </Link>
-      </div>
+        </div>
+      </Link>
       <Card.Body>
         <Card.Title className="ks-product-card-title">
           <Link to={`/product/${product.slug}`}>{product.name}</Link>

@@ -105,7 +105,7 @@ export default function Footer() {
               123 Fourth Avenue, Cape Town, South Africa, Earth, 8001
             </p>
           </Col>
-          <Col md={6} lg={3}>
+          <Col md={6} lg={3} className="ks-footer-social-container">
             <div className="ks-footer-social">
               <div className="ks-section-heading">
                 <hr className="ks-hr-primary" />

@@ -56,7 +56,7 @@ function HomePage() {
       </section>
 
       <section className="ks-section ks-section-fullwidth ks-section-align-right">
-        <div className="ks-section-heading">
+        <div className="ks-section-heading ks-section-heading-right">
           <hr className="ks-hr-primary" />
           <h2 className="ks-text-accent-blue">Front Runners</h2>
         </div>

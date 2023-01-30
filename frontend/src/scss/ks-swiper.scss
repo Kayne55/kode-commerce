@@ -1,0 +1,21 @@
+@import './ks-theme.scss';
+
+.ks-product-swiper {
+  padding-bottom: 30px;
+}
+
+.swiper-pagination-bullet-active {
+  background: $color-primary;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: $color-primary;
+  top: auto;
+  bottom: -0.7rem;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 1.4rem;
+}

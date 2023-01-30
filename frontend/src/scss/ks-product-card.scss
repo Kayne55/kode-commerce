@@ -21,6 +21,18 @@
 
 .ks-product-card-img {
   overflow: hidden;
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+}
+
+.ks-product-card-img img {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  object-fit: contain;
 }
 
 .ks-product-card-footer {

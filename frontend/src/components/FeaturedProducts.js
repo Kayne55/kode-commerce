@@ -1,9 +1,10 @@
 import React, { useEffect, useReducer } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Keyboard } from 'swiper';
+import { Pagination, Keyboard, Navigation } from 'swiper';
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
+import '../scss/ks-swiper.scss';
 import Product from './Product';
 import axios from 'axios';
 const reducer = (state, action) => {
@@ -46,10 +47,10 @@ export default function FeaturedProducts() {
       pagination={{
         dynamicBullets: true,
       }}
+      navigation
+      className="ks-product-swiper"
       keyboard={true}
-      modules={[Pagination, Keyboard]}
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
+      modules={[Pagination, Keyboard, Navigation]}
       breakpoints={{
         480: {
           slidesPerView: 2,

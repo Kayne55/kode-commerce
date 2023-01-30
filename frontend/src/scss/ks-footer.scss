@@ -3,7 +3,7 @@
 .ks-footer {
   color: #fff;
   background-color: $color-black;
-  padding: 50px 10%;
+  padding: 50px 5%;
 }
 
 .ks-footer h3,
@@ -100,6 +100,12 @@
 .ks-footer-menu a:hover::after {
   left: 20px;
   visibility: visible;
+}
+
+.ks-footer-social-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .ks-footer-social {

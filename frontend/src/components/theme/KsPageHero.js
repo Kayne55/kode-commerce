@@ -15,10 +15,10 @@ export default function PageHero(props) {
         minHeight: props.height + 'vh',
       }}
     >
-      <Container>
+      <Container fluid className="ks-container-full">
         <Row>
           <Col md={12}>
-            <div className="ks-hero-heading">
+            <div className="ks-hero-heading ks-section-heading-left">
               <h1>{props.title}</h1>
               <div className="ks-hero-heading-divider"></div>
             </div>
