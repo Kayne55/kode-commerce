@@ -31,7 +31,11 @@ uploadRouter.post(
         streamifier.createReadStream(req.file.buffer).pipe(stream);
       });
     };
-    const result = await streamUpload(req);
+    const result = await streamUpload(req).catch((err) => {
+      console.error(err);
+      res.status(500).send({ error: 'Upload failed' });
+    });
+    if (!result) return;
     res.send(result);
   }
 );
