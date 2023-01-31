@@ -49,7 +49,7 @@ export default function AddProduct() {
   const [images, setImages] = useState([]);
   const [category, setCategory] = useState('');
   const [brand, setBrand] = useState('');
-  const [isFeatured, setIsFeatured] = useState('');
+  const [isFeatured, setIsFeatured] = useState(false);
   const [countInStock, setCountInStock] = useState('');
   const [description, setDescription] = useState('');
 
