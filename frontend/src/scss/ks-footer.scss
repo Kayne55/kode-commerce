@@ -16,6 +16,10 @@
   text-decoration: none;
 }
 
+.ks-footer b {
+  font-weight: 900;
+}
+
 .ks-footer .ks-brand {
   font-size: 2rem;
   color: #fff;
@@ -69,43 +73,10 @@
   color: $color-primary;
 }
 
-.ks-footer-menu {
-  list-style: none;
-  padding: 0;
-}
-
-.ks-footer-menu li {
-  font-family: $font-body;
-  font-weight: 100;
-  margin: 15px 0;
-}
-
-.ks-footer-menu a {
-  color: #fff;
-  text-decoration: none;
-  position: relative;
-}
-
-.ks-footer-menu a::after {
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-  content: '\f061';
-  color: $color-primary;
-  position: relative;
-  left: 0;
-  visibility: hidden;
-  transition: all 0.2s;
-}
-
-.ks-footer-menu a:hover::after {
-  left: 20px;
-  visibility: visible;
-}
-
 .ks-footer-social-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
 }
 
 .ks-footer-social {
@@ -130,11 +101,26 @@
   justify-content: flex-end;
   list-style: none;
   padding: 0;
+  margin-top: 15px;
+}
+
+.ks-footer-social-icons li {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .ks-footer-social-icons i {
-  font-size: 2.8rem;
+  font-size: 2rem;
   margin-left: 20px;
+  transition: font-size 0.3s;
+}
+
+.ks-footer-social-icons i:hover {
+  color: $color-primary;
+  font-size: 2.6rem;
 }
 
 @media screen and (max-width: 992px) {

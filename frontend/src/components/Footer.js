@@ -44,7 +44,7 @@ export default function Footer() {
         </Row>
         <Row style={{ marginTop: '20px' }}>
           <Col md={4} lg={2}>
-            <ul className="ks-footer-menu">
+            <ul className="ks-nav-item-style-1">
               <li>
                 <Link to="">Login</Link>
               </li>
@@ -60,7 +60,7 @@ export default function Footer() {
             </ul>
           </Col>
           <Col md={4} lg={2}>
-            <ul className="ks-footer-menu">
+            <ul className="ks-nav-item-style-1">
               <li>
                 <Link to="">Frequent Questions</Link>
               </li>
@@ -76,7 +76,7 @@ export default function Footer() {
             </ul>
           </Col>
           <Col md={4} lg={2}>
-            <ul className="ks-footer-menu">
+            <ul className="ks-nav-item-style-1">
               <li>
                 <Link to="">About Us</Link>
               </li>
@@ -118,16 +118,24 @@ export default function Footer() {
             <div className="ks-footer-social-icons">
               <ul>
                 <li>
-                  <i className="fab fa-instagram"></i>
+                  <Link to="">
+                    <i className="fab fa-instagram"></i>
+                  </Link>
                 </li>
                 <li>
-                  <i className="fab fa-facebook-square"></i>
+                  <Link to="">
+                    <i className="fab fa-facebook-square"></i>
+                  </Link>
                 </li>
                 <li>
-                  <i className="fab fa-youtube"></i>
+                  <Link to="">
+                    <i className="fab fa-youtube"></i>
+                  </Link>
                 </li>
                 <li>
-                  <i className="fab fa-twitter"></i>
+                  <Link to="">
+                    <i className="fab fa-twitter"></i>
+                  </Link>
                 </li>
               </ul>
             </div>

@@ -291,47 +291,40 @@ function App() {
               <SearchBox />
               <br />
               <h6>PRODUCT CATEGORIES:</h6>
-              <Nav>
+              <Nav className="flex-column ks-nav-item-style-1">
                 {/* <Nav.Item>
                   <h4>Categories</h4>
                 </Nav.Item> */}
-                <Nav.Item>
-                  {categories.map((category) => (
-                    <Nav.Item key={category}>
-                      <LinkContainer
-                        to={{
-                          pathname: '/search',
-                          search: `category=${category}`,
-                        }}
-                        onClick={() => setSideBarIsOpen(false)}
-                      >
-                        <Nav.Link>{category}</Nav.Link>
-                      </LinkContainer>
-                    </Nav.Item>
-                  ))}
-                </Nav.Item>
+                {categories.map((category) => (
+                  <Nav.Item key={category}>
+                    <LinkContainer
+                      to={{
+                        pathname: '/search',
+                        search: `category=${category}`,
+                      }}
+                      onClick={() => setSideBarIsOpen(false)}
+                    >
+                      <Nav.Link>{category}</Nav.Link>
+                    </LinkContainer>
+                  </Nav.Item>
+                ))}
               </Nav>
               <hr />
               <h6>BRANDS:</h6>
-              <Nav>
-                {/* <Nav.Item>
-                  <h4>Categories</h4>
-                </Nav.Item> */}
-                <Nav.Item>
-                  {brands.map((brand) => (
-                    <Nav.Item key={brand}>
-                      <LinkContainer
-                        to={{
-                          pathname: '/search',
-                          search: `brand=${brand}`,
-                        }}
-                        onClick={() => setSideBarIsOpen(false)}
-                      >
-                        <Nav.Link>{brand}</Nav.Link>
-                      </LinkContainer>
-                    </Nav.Item>
-                  ))}
-                </Nav.Item>
+              <Nav className="flex-column ks-nav-item-style-1">
+                {brands.map((brand) => (
+                  <Nav.Item key={brand}>
+                    <LinkContainer
+                      to={{
+                        pathname: '/search',
+                        search: `brand=${brand}`,
+                      }}
+                      onClick={() => setSideBarIsOpen(false)}
+                    >
+                      <Nav.Link>{brand}</Nav.Link>
+                    </LinkContainer>
+                  </Nav.Item>
+                ))}
               </Nav>
             </Offcanvas.Body>
           </Offcanvas>

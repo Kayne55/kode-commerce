@@ -13,6 +13,39 @@
   color: $color-primary;
 }
 
+.ks-nav-item-style-1 {
+  list-style: none;
+  padding: 0;
+}
+
+.ks-nav-item-style-1 li {
+  font-family: $font-body;
+  font-weight: 100;
+  margin: 15px 0;
+}
+
+.ks-nav-item-style-1 a {
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+}
+
+.ks-nav-item-style-1 a::after {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  content: '\f061';
+  color: $color-primary;
+  position: relative;
+  left: 0;
+  visibility: hidden;
+  transition: all 0.2s;
+}
+
+.ks-nav-item-style-1 a:hover::after {
+  left: 20px;
+  visibility: visible;
+}
+
 // Offcanvas Menus
 
 .ks-offcanvas-primary {
@@ -29,5 +62,9 @@
 }
 
 .ks-offcanvas-primary a:hover {
-  color: $color-blue;
+  color: #fff;
+}
+
+.ks-offcanvas-primary a:hover::after {
+  color: #000;
 }
